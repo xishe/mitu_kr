@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Результаты оценки альтернатив</title>
+</head>
+<body>
+    <h1>Введите данные для оценки альтернатив</h1>
+    <form action="/" method="post">
+        <div>
+            <h2>Веса критериев</h2>
+            {% for weight in criteria_weights %}
+            <input type="number" step="0.01" name="criteria_weights[]" value="{{ weight }}" required>
+            {% endfor %}
+        </div>
+        <div>
+            <h2>Названия критериев</h2>
+            {% for name in criteria_names %}
+            <input type="text" name="criteria_names[]" value="{{ name }}" required>
+            {% endfor %}
+        </div>
+        <div>
+            <h2>Альтернативы и оценки</h2>
+            {% for i in range(alternative_names|length) %}
+            <div>
+                <input type="text" name="alternative_names[]" value="{{ alternative_names[i] }}" required>
+                {% for score in alternative_scores[i] %}
+                <input type="number" name="scores_row_{{i}}[]" value="{{ score }}" required>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+        <button type="submit">Выполнить</button>
+    </form>
+
+    {% if results %}
+    <h2>Результаты</h2>
+    <table border="1">
+        <tr>
+            <th>Альтернатива</th>
+            <th>Общая полезность</th>
+        </tr>
+        {% for name, utility in results.items() %}
+        <tr>
+            <td>{{ name }}</td>
+            <td>{{ utility }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
