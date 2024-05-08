@@ -1,9 +1,9 @@
-# mitu_konf
+# mitu_kr
 
 Запустить:
 1. Клонирование репозитория.
 
-```git clone https://github.com/xishe/mitu_konf```
+```git clone https://github.com/xishe/mitu_kr```
 
 2. Скачивание библиотек.
 
